@@ -1,0 +1,172 @@
+import os
+specialChar = ['[',']','{','}','(',')','.',',',':',';']
+keywordIds = ['<','>','#','^']
+specialWord = ['Accessed','Available From']
+keyword = ['lName','fIn','org','title','accessDate','writeDate','journal','page','volume','edition']
+italics = '\033[3m'
+end = '\033[0m'
+inputs = []
+inputsInt = 0
+
+def selectStyle(): #selects uni style
+    styles = []
+    count = 1
+    num = -1
+    stylesF = open("styles.txt", "rt")
+    print("Referencing styles available:")
+    for line in stylesF: #lists available uni styles
+        styles.append(line)
+        print("%d. %s" %(count, line))
+        count += 1
+    while num == -1: #error handled input
+        num = intIn(1, count-1, "Please select the number of the style desired:")
+    stylesF.close()
+    choice = styles[num - 1]
+    input("You have selected: %s. Press RETURN to continue" %(choice,))
+    os.system("cls")
+    return choice
+    
+def selectSource(style): #selects source type
+    sources = []
+    count = 1
+    num = -1
+    file = style + ".txt"
+    sourcesF = open(file, "rt")
+    print("Referencing sources available:")
+    for line in sourcesF: #lists available source types
+        ind = line.find(':')
+        sourceType = line[0:ind]
+        sources.append(sourceType)
+        print("%d. %s" %(count, sourceType))
+        count += 1
+    while num == -1:
+        num = intIn(1, count-1, "Please select the number of the source desired:")
+    sourcesF.close()
+    choice = sources[num - 1]
+    input("You have selected: %s. Press RETURN to continue" %(choice,))
+    os.system("cls")
+    return choice
+    
+def refBuilder(style, source): #builds reference and citation
+    file = style + ".txt"
+    sourcesF = open(file, "rt")
+    for line in sourcesF:
+        if line.find(source) != -1:
+            ref = line
+    ind = ref.find(':')
+    ref = ref[ind+1:len(ref)-1]
+    keyword = False;
+    italicsOn = False;
+    inpOn = False;
+    inputsInt = 0
+    final = ""
+    currentDes = ""
+    for x in range(len(ref)-1):
+        char = ref[x]
+        if char in keywordIds:
+            if char == '<':
+                keyword = True;
+            elif char == '>' and keyword == True:
+                val = str(userIn(currentDes))
+                inputs.append(val)
+                inputsInt += 1
+                final += val
+                currentDes = ""
+            elif char == '^':
+                if italicsOn:
+                    final += end
+                    italicsOn = False
+                else:
+                    final += currentDes
+                    currentDes = ""
+                    final += italics
+                    italicsOn = True
+            elif char == '#':
+                if inpOn:
+                    final += inputs[int(currentDes)]
+                    currentDes = ""
+                    inpOn = False
+                else:
+                    final += currentDes
+                    currentDes = ""
+                    inpOn = True
+        elif char in specialChar:
+            if currentDes != "":
+                if currentDes == 'Citation':
+                    currentDes += char
+                    final +=  currentDes
+                    currentDes = ""
+                elif currentDes in specialWord:
+                    final += currentDes
+                    currentDes = ""   
+                else:
+                    currentDes += char
+            else:
+                final += char
+        elif char == " ":
+            final += char
+        else:
+            currentDes += char
+    print()
+    print("Reference: " + final)
+    print()
+    #debug purposes
+    for i in range(len(inputs)):
+        print(inputs[i])
+    
+def userIn(type):
+    ret = ""
+    if type == "lName":
+        ret = input("Enter the last name: ")
+    elif type == "fIn":
+        ret = input("Enter the first initial: ")
+    elif type == "org":
+        ret = input("Enter the organisation name: ")
+    elif type == "accessDate":
+        ret = input("Enter the accessed date (format DD Mon YYYY): ")
+    elif type == "writeDate":
+        ret = intIn(1000,-1,"Enter the year the source was written (format YYYY): ")
+    elif type == "title":
+        ret = input("Enter the title: ")
+    elif type == "place":
+        ret = input("Enter the place of publication: ")
+    elif type == "publish":
+        ret = input("Enter the publisher: ")
+    elif type == "page":
+        ret = intIn(0,-1,"Enter the page number: ")
+    elif type == "volume":
+        ret = intIn(0,-1,"Enter the volume number: ")
+    elif type == "edition":
+        ret = intIn(0,-1,"Enter the edition number: ")
+    else:
+        ret = input("Enter the " + type + ":")
+    return ret
+
+def intIn(minVal, maxVal, text): #allows integer input error handling
+    num = -1
+    try:
+        num = int(input(text))
+        if minVal >= -1:
+            if num < minVal: #lower integer error handling
+                print("ERROR: Please enter a number greater than", minVal)
+                num = -1
+        if maxVal > -1:
+            if num > maxVal: #higher integer error handling
+                print("ERROR: Please enter a number less than", maxVal)
+                num = -1
+    except: #other type error handling
+        print("ERROR: Please enter a whole number")
+        num = -1
+    return num
+
+os.system("cls")
+print("Welcome to UniReference")#intro
+print("Created by Xyla Oldale")
+print("The centralised referencing system for universities")
+print()
+input("Press RETURN to continue")
+os.system("cls")
+style = selectStyle()#selecting uni style
+source = selectSource(style) #selecting source type
+refBuilder(style, source) #builds reference and citation
+

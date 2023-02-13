@@ -1,0 +1,16 @@
+Book: <lName>, <fIn>. (<writeDate>) ^<title>^. <edition>. <place>: <publisher> Citation: ^#0#, #1#^. (#2#)
+Book, Online: <lName>, <fIn>. (<writeDate>) ^<title>^ [online]. <edition>. <place>: <publisher> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#)
+Journal Article: <lName>, <fIn>. (<writeDate>) <title>. ^<journal>^. <vol> (<issue>), pp. <fPage>-<lPage>. Citation: ^#0#, #1#^. (#2#), pp. #5#-#6#
+Journal Article, Online: <lName>, <fIn>. (<writeDate>) <title>. ^<journal>^ [online]. <vol> (<issue>), pp. <fPage>-<lPage>. [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#), pp. #5#-#6#
+Website, Name: <lName>, <fIn> (<writeDate>) ^<title>^. Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#)
+Website, Organisation: <org> (<writeDate>) ^<title>^. Available from: <url> [Accessed <accessDate>] Citation: ^#0#^. (#1#)
+Law Case: ^<NoP>^ [<writeDate>] <vol> <abbLaw> <page> (<court>) Citation: ^#0#^, #1#
+Report, Name: <lName>, <fIn>. (<writeDate>) ^<title>^. Report number: <repNum>. pp. <fPage>-<lPage> <place>: <publisher>. Citation: ^#0#, #1#^. (#2#), pp. #5#-#6#
+Report, Organisation: <org>. (<writeDate>) ^<title>^. Report number: <repNum>. pp. <fPage>-<lPage> <place>: <publisher>. Citation: ^#0#^. (#1#), pp. #4#-#5#
+Report, Name, Online: <lName>, <fIn>. (<writeDate>) ^<title>^ [online]. Report number: <repNum>. pp. <fPage>-<lPage> <place>: <publisher>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#), pp. #5#-#6#
+Report, Organisation, Online: <org>. (<writeDate>) ^<title>^ [online]. Report number: <repNum>. pp. <fPage>-<lPage> <place>: <publisher>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#^. (#1#), pp. #4#-#5#
+Video, Name: <lName>, <fIn>. (<writeDate>) <title>. <web> [video]. <posted>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#)
+Video, Organisation:  <org>. (<writeDate>) <title>. ^<web>^ [video]. <posted>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#^. (#1#)
+Student Dissertation/Project/Theses: <lName>, <fIn>. (<writeDate>) ^<title>^. <level>, <uni> Citation: ^#0#, #1#^. (#2#)
+Student Dissertation/Project/Theses, Online: <lName>, <fIn>. (<writeDate>) ^<title>^ [online]. <level>, <uni> Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#)
+Other: https://www.uwe.ac.uk/study/study-support/study-skills/referencing/uwe-bristol-harvard
