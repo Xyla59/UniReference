@@ -64,6 +64,7 @@ class refBuild:
         for line in sourcesF:
             if line.find(source) != -1:
                 ref = line
+                break
         ind = ref.find(':')
         ref = ref[ind+1:len(ref)]
         keyword = False
@@ -196,8 +197,10 @@ class refBuild:
         elif type == "uni":
             ret = input("Enter the name of the university: ")
             ret = ret.title()
-        elif type == "page":
-            ret = self.intIn(0,-1,"Enter the page number: ")
+        elif type == "fPage":
+            ret = self.intIn(0,-1,"Enter the first page number: ")
+        elif type == "lPage":
+            ret = self.intIn(0,-1,"Enter the first page number: ")
         elif type == "vol":
             ret = self.intIn(0,-1,"Enter the volume number: ")
         elif type == "edition":
