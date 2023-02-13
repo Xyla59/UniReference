@@ -1,17 +1,17 @@
-import os
-import pyperclip as pc
+import os #to clear cli
+import pyperclip as pc #to copy to clipboard
 
 class refBuild:
     def __init__(self):
-        self.specialChar = ['[',']','{','}','(',')','.',',',':',';']
-        self.keywordIds = ['<','>','#','^']
-        self.specialWord = ['Accessed','Available From']
-        self.italics = '\033[3m'
-        self.end = '\033[0m'
-        self.inputs = []
-        self.inputsInt = 0
-        self.final_ = ""
-        self.citation_ = ""
+        self.specialChar = ['[',']','{','}','(',')','.',',',':',';'] #special characters
+        self.keywordIds = ['<','>','#','^'] #keyword ids, userin, /userin, index of userins, italics marker
+        self.specialWord = ['Accessed','Available From'] #special words
+        self.italics = '\033[3m' #italics starter
+        self.end = '\033[0m' #italics ender
+        self.inputs = [] #userins
+        self.inputsInt = 0 #no. of ins
+        self.final_ = "" #final reference
+        self.citation_ = "" #final citation
         os.system("cls")
         print("Welcome to UniReference")#intro
         print("Created by Xyla Oldale")
@@ -60,7 +60,7 @@ class refBuild:
         
     def refBuilder(self, style, source): #builds reference and citation
         file = style + ".txt"
-        sourcesF = open(file, "rt")
+        sourcesF = open(file, "rt") #finds ref format
         for line in sourcesF:
             if line.find(source) != -1:
                 ref = line
@@ -74,26 +74,26 @@ class refBuild:
         cite = False
         self.citation_ = ""
         currentDes = ""
-        if source == "Other":
+        if source == "Other": #other sources not covered
             print("Your source type is not supported by UniReference, please visit:\n \n %s \n\nfor more assistance! \n" %(ref))
         else:
-            for x in range(len(ref)):
+            for x in range(len(ref)): #loops through characters
                 char = ref[x]
-                if currentDes in self.specialWord:
+                if currentDes in self.specialWord: #instant finalises special words
                     self.finalise(currentDes, cite)
                     currentDes = ""
-                if char in self.keywordIds:
-                    if char == '<':
+                if char in self.keywordIds: #sorts keywords
+                    if char == '<': #userin begin
                         self.finalise(currentDes, cite)
                         currentDes = ""
                         keyword = True
-                    elif char == '>' and keyword == True:
+                    elif char == '>' and keyword == True: #userin complete, gets input
                         val = str(self.userIn(currentDes))
                         self.inputs.append(val)
                         inputsInt += 1
                         self.finalise(val, cite)
                         currentDes = ""
-                    elif char == '^':
+                    elif char == '^': #sets italics
                         if italicsOn:
                             self.finalise(self.end ,cite)
                             italicsOn = False
@@ -102,7 +102,7 @@ class refBuild:
                             currentDes = ""
                             self.finalise(self.italics, cite)
                             italicsOn = True
-                    elif char == '#':
+                    elif char == '#': #sets getting indexed input
                         if inpOn:
                             self.finalise(self.inputs[int(currentDes)],cite)
                             currentDes = ""
@@ -111,9 +111,9 @@ class refBuild:
                             self.finalise(currentDes, cite)
                             currentDes = ""
                             inpOn = True
-                elif char in self.specialChar:
+                elif char in self.specialChar: #Detects special characters
                     if currentDes != "":
-                        if currentDes == 'Citation':
+                        if currentDes == 'Citation': #switches to citation
                             currentDes += char
                             cite = True
                             self.finalise(currentDes, cite)
@@ -128,30 +128,30 @@ class refBuild:
                     self.finalise(char, cite)
                 else:
                     currentDes += char
-            self.print()
+            self.print() #formatted printed
             #debug purposes
             #for i in range(len(inputs)):
             #    print(inputs[i])
 
-    def print(self):
+    def print(self): #formatted printing
         print()
-        print("Reference:" + self.final_)
-        print(self.citation_)
+        print("Reference:" + self.final_) #prints reference
+        print(self.citation_) #prints citation
         print()
-        copy = input("Copy reference to clipboard (y/n): ")
+        copy = input("Copy reference to clipboard (y/n): ") #copying ref to clipboard (Error with italics)
         copy = copy.lower()
         if copy == 'y':
             pc.copy(self.final_)
             print("Copied successfully!")
         print()
-        copy = input("Copy citation to clipboard (y/n): ")
+        copy = input("Copy citation to clipboard (y/n): ") #copying cite to clipboard (Error with italics)
         copy = copy.lower()
         if copy == 'y':
             pc.copy(self.citation_)
             print("Copied successfully!")
         print()
         
-    def userIn(self, type):
+    def userIn(self, type): #case/switch of user input markers
         ret = ""
         if type == "lName":
             ret = input("Enter the last name: ")
@@ -212,7 +212,7 @@ class refBuild:
             ret = ""
         return ret
 
-    def finalise(self, text, cite):
+    def finalise(self, text, cite): #adding to correct variable
         if cite == True:
             self.citation_
             self.citation_ += text
@@ -238,9 +238,9 @@ class refBuild:
             num = -1
         return num
 
-    def main(self):
+    def main(self): #main selections and processing
         loop = True
-        while loop == True:
+        while loop == True: #looping until no more refs wanted
             os.system("cls")
             style = self.selectStyle()#selecting uni style
             source = self.selectSource(style) #selecting source type
@@ -250,7 +250,7 @@ class refBuild:
             if inp == 'n':
                 loop = False
 
-if __name__ == "__main__":
+if __name__ == "__main__": #first run code
     ref = refBuild()
     ref.main()
 
