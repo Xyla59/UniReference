@@ -9,8 +9,8 @@ Report, Name: <lName>, <fIn>. (<writeDate>) ^<title>^. Report number: <repNum>. 
 Report, Organisation: <org>. (<writeDate>) ^<title>^. Report number: <repNum>. <place>: <publisher>. Citation: ^#0#^. (#1#), pp. <fPage>-<lPage>
 Report, Name, Online: <lName>, <fIn>. (<writeDate>) ^<title>^ [online]. Report number: <repNum>. <place>: <publisher>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#), pp. <fPage>-<lPage>
 Report, Organisation, Online: <org>. (<writeDate>) ^<title>^ [online]. Report number: <repNum>. <place>: <publisher>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#^. (#1#), pp. <fPage>-<lPage>
-Video, Name: <lName>, <fIn>. (<writeDate>) <title>. <web> [video]. <posted>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#) <time>
-Video, Organisation:  <org>. (<writeDate>) <title>. ^<web>^ [video]. <posted>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#^. (#1#) <time>
+Video, Name: <lName>, <fIn>. (<writeDate>) <title>. <web> [video]. <posted>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#), <time>
+Video, Organisation:  <org>. (<writeDate>) <title>. ^<web>^ [video]. <posted>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#^. (#1#), <time>
 Student Dissertation/Project/Theses: <lName>, <fIn>. (<writeDate>) ^<title>^. <level>, <uni> Citation: ^#0#, #1#^. (#2#)
 Student Dissertation/Project/Theses, Online: <lName>, <fIn>. (<writeDate>) ^<title>^ [online]. <level>, <uni> Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#)
 Other: https://www.uwe.ac.uk/study/study-support/study-skills/referencing/uwe-bristol-harvard

@@ -197,6 +197,8 @@ class refBuild:
         elif type == "uni":
             ret = input("Enter the name of the university: ")
             ret = ret.title()
+        elif type == "time":
+            ret = input("Enter the timestamp for the citation (format hh:mm:ss / mm:ss): ")
         elif type == "fPage":
             ret = self.intIn(0,-1,"Enter the first page number: ")
         elif type == "lPage":
