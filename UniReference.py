@@ -4,10 +4,11 @@ import pyperclip as pc #to copy to clipboard
 class refBuild:
     def __init__(self):
         self.specialChar = ['[',']','{','}','(',')','.',',',':',';'] #special characters
-        self.keywordIds = ['<','>','#','^'] #keyword ids, userin, /userin, index of userins, italics marker
+        self.keywordIds = ['<','>','#','^', '~'] #keyword ids, userin, /userin, index of userins, italics marker, loop marker
         self.specialWord = ['Accessed','Available From'] #special words
         self.italics = '\033[3m' #italics starter
         self.end = '\033[0m' #italics ender
+        self.inTypes = [] #input types
         self.inputs = [] #userins
         self.inputsInt = 0 #no. of ins
         self.final_ = "" #final reference
@@ -69,6 +70,7 @@ class refBuild:
         ref = ref[ind+1:len(ref)]
         keyword = False
         italicsOn = False
+        loopOn = False
         inpOn = False
         inputsInt = 0
         self.final_ = ""
@@ -89,6 +91,7 @@ class refBuild:
                         currentDes = ""
                         keyword = True
                     elif char == '>' and keyword == True: #userin complete, gets input
+                        self.inTypes.append(currentDes)
                         val = str(self.userIn(currentDes))
                         self.inputs.append(val)
                         inputsInt += 1
@@ -112,6 +115,13 @@ class refBuild:
                             self.finalise(currentDes, cite)
                             currentDes = ""
                             inpOn = True
+                    elif char == '~': #loops if more than one input is required
+                        if loopOn:
+                            self.loop()
+                        else:
+                            self.finalise(currentDes, cite)
+                            currentDes = ""
+                            loopOn = True
                 elif char in self.specialChar: #Detects special characters
                     if currentDes != "":
                         if currentDes == 'Citation': #switches to citation
@@ -133,6 +143,9 @@ class refBuild:
             #debug purposes
             #for i in range(len(inputs)):
             #    print(inputs[i])
+
+    #def loop(self):
+
 
     def print(self): #formatted printing
         print()
