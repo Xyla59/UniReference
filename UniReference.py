@@ -80,7 +80,8 @@ class refBuild:
         if source == "Other": #other sources not covered
             print("Your source type is not supported by UniReference, please visit:\n \n %s \n\nfor more assistance! \n" %(ref))
         else:
-            for x in range(len(ref)): #loops through characters
+            x = 0
+            while x < len(ref): #loops through characters
                 char = ref[x]
                 if currentDes in self.specialWord: #instant finalises special words
                     self.finalise(currentDes, cite)
@@ -117,7 +118,15 @@ class refBuild:
                             inpOn = True
                     elif char == '~': #loops if more than one input is required
                         if loopOn:
-                            self.loop()
+                            ind = currentDes.find(',')
+                            text = currentDes[0:ind]
+                            revert = int(currentDes[ind+1:len(currentDes)])
+                            currentDes = ""
+                            inp = input("Would you like to insert another " + text + " (y/n): ")
+                            if inp.lower() == 'y':
+                                self.finalise(", ", cite)
+                                x -= revert
+                            loopOn = False
                         else:
                             self.finalise(currentDes, cite)
                             currentDes = ""
@@ -139,13 +148,32 @@ class refBuild:
                     self.finalise(char, cite)
                 else:
                     currentDes += char
+                x += 1
             self.print() #formatted printed
             #debug purposes
             #for i in range(len(inputs)):
             #    print(inputs[i])
 
-    #def loop(self):
-
+    """ def loop(self, inTypes):
+        ind = inTypes.find(',')
+        text = inTypes[0:ind]
+        types = int(inTypes[ind+1:len(inTypes)])
+        loop = True
+        refText = ""
+        while loop == True:
+            inp = input("Would you like to insert another " + text + " (y/n): ")
+            if inp.lower() == 'n':
+                loop = False
+                return -1
+            elif inp.lower() == 'y':
+                refText += ", "
+                for i in range(0,types):
+                    var = self.userIn(self.inTypes[len(self.inTypes) - (types + 1 - i)])
+                    refText += var
+                    
+            else:
+                print("ERROR: please enter y/n") """
+            
 
     def print(self): #formatted printing
         print()
@@ -156,13 +184,13 @@ class refBuild:
         copy = copy.lower()
         if copy == 'y':
             pc.copy(self.final_)
-            print("Copied successfully!")
+            print("Copied reference successfully!")
         print()
         copy = input("Copy citation to clipboard (y/n): ") #copying cite to clipboard (Error with italics)
         copy = copy.lower()
         if copy == 'y':
             pc.copy(self.citation_)
-            print("Copied successfully!")
+            print("Copied citation successfully!")
         print()
         
     def userIn(self, type): #case/switch of user input markers
