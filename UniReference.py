@@ -74,7 +74,7 @@ class refBuild:
         inpOn = False
         inputsInt = 0
         self.final_ = ""
-        cite = False
+        fType = 1
         self.citation_ = ""
         currentDes = ""
         if source == "Other": #other sources not covered
@@ -84,11 +84,11 @@ class refBuild:
             while x < len(ref): #loops through characters
                 char = ref[x]
                 if currentDes in self.specialWord: #instant finalises special words
-                    self.finalise(currentDes, cite)
+                    self.finalise(currentDes, fType)
                     currentDes = ""
                 if char in self.keywordIds: #sorts keywords
                     if char == '<': #userin begin
-                        self.finalise(currentDes, cite)
+                        self.finalise(currentDes, fType)
                         currentDes = ""
                         keyword = True
                     elif char == '>' and keyword == True: #userin complete, gets input
@@ -96,56 +96,59 @@ class refBuild:
                         val = str(self.userIn(currentDes))
                         self.inputs.append(val)
                         inputsInt += 1
-                        self.finalise(val, cite)
+                        self.finalise(val, fType)
                         currentDes = ""
                     elif char == '^': #sets italics
                         if italicsOn:
-                            self.finalise(self.end ,cite)
+                            self.finalise(self.end ,fType)
                             italicsOn = False
                         else:
-                            self.finalise(currentDes, cite)
+                            self.finalise(currentDes, fType)
                             currentDes = ""
-                            self.finalise(self.italics, cite)
+                            self.finalise(self.italics, fType)
                             italicsOn = True
                     elif char == '#': #sets getting indexed input
                         if inpOn:
-                            self.finalise(self.inputs[int(currentDes)],cite)
+                            self.finalise(self.inputs[int(currentDes)],fType)
                             currentDes = ""
                             inpOn = False
                         else:
-                            self.finalise(currentDes, cite)
+                            self.finalise(currentDes, fType)
                             currentDes = ""
                             inpOn = True
                     elif char == '~': #loops if more than one input is required
                         if loopOn:
+                            fType = 0
                             ind = currentDes.find(',')
                             text = currentDes[0:ind]
                             revert = int(currentDes[ind+1:len(currentDes)])
                             currentDes = ""
                             inp = input("Would you like to insert another " + text + " (y/n): ")
                             if inp.lower() == 'y':
-                                self.finalise(", ", cite)
+                                self.finalise(", ", fType)
                                 x -= revert
+                            else:
+                                self.final_[len(self.final_) - (revert + 2)] = ' and' #ERROR
                             loopOn = False
                         else:
-                            self.finalise(currentDes, cite)
+                            self.finalise(currentDes, fType)
                             currentDes = ""
                             loopOn = True
                 elif char in self.specialChar: #Detects special characters
                     if currentDes != "":
                         if currentDes == 'Citation': #switches to citation
                             currentDes += char
-                            cite = True
-                            self.finalise(currentDes, cite)
+                            fType = 2
+                            self.finalise(currentDes, fType)
                             currentDes = ""   
                         else:
                             currentDes += char
                     else:
-                        self.finalise(char, cite)
+                        self.finalise(char, fType)
                 elif char == " ":
-                    self.finalise(currentDes, cite)
+                    self.finalise(currentDes, fType)
                     currentDes = ""
-                    self.finalise(char, cite)
+                    self.finalise(char, fType)
                 else:
                     currentDes += char
                 x += 1
@@ -258,11 +261,10 @@ class refBuild:
             ret = ""
         return ret
 
-    def finalise(self, text, cite): #adding to correct variable
-        if cite == True:
-            self.citation_
+    def finalise(self, text, fType): #adding to correct variable
+        if fType == 2:
             self.citation_ += text
-        else:
+        elif fType == 1:
             self.final_ += text
 
     def intIn(self, minVal, maxVal, text): #allows integer input error handling
