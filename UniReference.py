@@ -11,8 +11,12 @@ class refBuild:
         self.inTypes = [] #input types
         self.inputs = [] #userins
         self.inputsInt = 0 #no. of ins
+        self.fType = 1
+        self.pFType = 0
         self.final_ = "" #final reference
         self.citation_ = "" #final citation
+        self.temp = [] #temp string array for loops
+        self.refLoop = 0
         os.system("cls")
         print("Welcome to UniReference")#intro
         print("Created by Xyla Oldale")
@@ -74,21 +78,19 @@ class refBuild:
         inpOn = False
         inputsInt = 0
         self.final_ = ""
-        fType = 1
         self.citation_ = ""
         currentDes = ""
         if source == "Other": #other sources not covered
             print("Your source type is not supported by UniReference, please visit:\n \n %s \n\nfor more assistance! \n" %(ref))
         else:
-            x = 0
-            while x < len(ref): #loops through characters
-                char = ref[x]
+            while self.refLoop < len(ref): #loops through characters
+                char = ref[self.refLoop]
                 if currentDes in self.specialWord: #instant finalises special words
-                    self.finalise(currentDes, fType)
+                    self.finalise(currentDes)
                     currentDes = ""
                 if char in self.keywordIds: #sorts keywords
                     if char == '<': #userin begin
-                        self.finalise(currentDes, fType)
+                        self.finalise(currentDes)
                         currentDes = ""
                         keyword = True
                     elif char == '>' and keyword == True: #userin complete, gets input
@@ -96,86 +98,123 @@ class refBuild:
                         val = str(self.userIn(currentDes))
                         self.inputs.append(val)
                         inputsInt += 1
-                        self.finalise(val, fType)
+                        self.finalise(val)
                         currentDes = ""
                     elif char == '^': #sets italics
                         if italicsOn:
-                            self.finalise(self.end ,fType)
+                            self.finalise(self.end)
                             italicsOn = False
                         else:
-                            self.finalise(currentDes, fType)
+                            self.finalise(currentDes)
                             currentDes = ""
-                            self.finalise(self.italics, fType)
+                            self.finalise(self.italics)
                             italicsOn = True
                     elif char == '#': #sets getting indexed input
                         if inpOn:
-                            self.finalise(self.inputs[int(currentDes)],fType)
+                            var = self.inTypes.index(currentDes)
+                            self.finalise(self.inputs[var])
                             currentDes = ""
                             inpOn = False
                         else:
-                            self.finalise(currentDes, fType)
+                            self.finalise(currentDes)
                             currentDes = ""
                             inpOn = True
                     elif char == '~': #loops if more than one input is required
-                        if loopOn:
-                            fType = 0
-                            ind = currentDes.find(',')
-                            text = currentDes[0:ind]
-                            revert = int(currentDes[ind+1:len(currentDes)])
-                            currentDes = ""
-                            inp = input("Would you like to insert another " + text + " (y/n): ")
-                            if inp.lower() == 'y':
-                                self.finalise(", ", fType)
-                                x -= revert
-                            else:
-                                self.final_[len(self.final_) - (revert + 2)] = ' and' #ERROR
+                        self.loop(loopOn, currentDes)
+                        currentDes = ""
+                        if loopOn == True:
                             loopOn = False
                         else:
-                            self.finalise(currentDes, fType)
-                            currentDes = ""
                             loopOn = True
                 elif char in self.specialChar: #Detects special characters
                     if currentDes != "":
                         if currentDes == 'Citation': #switches to citation
                             currentDes += char
-                            fType = 2
-                            self.finalise(currentDes, fType)
+                            self.change(2)
+                            self.finalise(currentDes)
                             currentDes = ""   
                         else:
                             currentDes += char
                     else:
-                        self.finalise(char, fType)
+                        self.finalise(char)
                 elif char == " ":
-                    self.finalise(currentDes, fType)
+                    self.finalise(currentDes)
                     currentDes = ""
-                    self.finalise(char, fType)
+                    self.finalise(char)
                 else:
                     currentDes += char
-                x += 1
+                self.refLoop += 1
             self.print() #formatted printed
             #debug purposes
             #for i in range(len(inputs)):
             #    print(inputs[i])
 
-    """ def loop(self, inTypes):
-        ind = inTypes.find(',')
-        text = inTypes[0:ind]
-        types = int(inTypes[ind+1:len(inTypes)])
-        loop = True
-        refText = ""
-        while loop == True:
-            inp = input("Would you like to insert another " + text + " (y/n): ")
-            if inp.lower() == 'n':
-                loop = False
-                return -1
-            elif inp.lower() == 'y':
-                refText += ", "
-                for i in range(0,types):
-                    var = self.userIn(self.inTypes[len(self.inTypes) - (types + 1 - i)])
-                    refText += var
-                    
+    def change(self, fType):
+        if self.fType != fType:
+            self.pFType = self.fType
+            self.fType = fType
+
+    def loop(self, loopOn, varStr):
+        if loopOn:
+            self.change(0)
+            try:
+                ind = varStr.find(',')
+            except:
+                ind = -1
+            if ind != -1:
+                text = varStr[0:ind]
+                revert = int(varStr[ind+1:len(varStr)])
+                inp = input("Would you like to insert another " + text + " (y/n): ")
+                if inp.lower() == 'y':
+                    self.finalise(", ")
+                    self.refLoop -= revert
+                else:
+                    self.change(self.pFType)
+                    try:
+                        ind = self.temp.index(", ")
+                    except:
+                        ind = -1
+                    if ind != -1:
+                        while ind != -1:
+                            prev = ind
+                            try:
+                                ind = self.temp.index(", ", prev+1)
+                            except:
+                                ind = -1
+                        self.temp[prev] = " and "
+                        for y in range(0, len(self.temp)):
+                            self.finalise(self.temp[y])
             else:
-                print("ERROR: please enter y/n") """
+                self.temp = []
+                count = self.inTypes.count(varStr)
+                if count == 2:
+                    ind = self.inTypes.index(varStr)
+                    prev = ind
+                    for z in range(0, count - 1):
+                        try:
+                            ind = self.inTypes.index(varStr, prev + 1)
+                            self.finalise(", ")
+                            self.finalise(self.italics)
+                            self.finalise(self.inputs[ind])
+                            self.finalise(self.end)
+                        except:
+                            print(end="")
+                    self.change(self.pFType)
+                    ind = self.temp.index(", ")
+                    self.temp[ind] = self.italics + " and " + self.end
+                    for zz in range(0, len(self.temp)):
+                        self.finalise(self.temp[zz])
+                elif count > 2:
+                    self.change(self.pFType)
+                    self.finalise(self.italics)
+                    self.finalise(" et al")
+                    self.finalise(self.end)
+                else:
+                    self.change(self.pFType)
+            loopOn = False
+        else:
+            self.finalise(varStr)
+            loopOn = True
             
 
     def print(self): #formatted printing
@@ -261,11 +300,13 @@ class refBuild:
             ret = ""
         return ret
 
-    def finalise(self, text, fType): #adding to correct variable
-        if fType == 2:
+    def finalise(self, text): #adding to correct variable
+        if self.fType == 2:
             self.citation_ += text
-        elif fType == 1:
+        elif self.fType == 1:
             self.final_ += text
+        elif self.fType == 0:
+            self.temp.append(text)
 
     def intIn(self, minVal, maxVal, text): #allows integer input error handling
         num = -1
@@ -285,6 +326,17 @@ class refBuild:
                 print("ERROR: Please enter a whole number")
             num = -1
         return num
+    
+    def reset(self):
+        self.inTypes = []
+        self.inputs = []
+        self.inputsInt = 0
+        self.fType = 1
+        self.pFType = 0
+        self.final_ = "" 
+        self.citation_ = ""
+        self.temp = []
+        self.refLoop = 0
 
     def main(self): #main selections and processing
         loop = True
@@ -297,6 +349,7 @@ class refBuild:
             inp = inp.lower()
             if inp == 'n':
                 loop = False
+            self.reset()
 
 if __name__ == "__main__": #first run code
     ref = refBuild()

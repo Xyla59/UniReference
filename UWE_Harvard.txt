@@ -1,16 +1,16 @@
-Book: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^. <edition>. <place>: <publisher> Citation: ^#0#, #1#^. (#2#)
-Book, Online: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^ [online]. <edition>. <place>: <publisher> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#)
-Journal Article: <lName>, <fIn>. (<writeDate>) <title>. ^<journal>^. <vol> (<issue>), pp. <fPage>-<lPage>. Citation: ^#0#, #1#^. (#2#), pp. #7#-#8#
-Journal Article, Online: <lName>, <fIn>. (<writeDate>) <title>. ^<journal>^ [online]. <vol> (<issue>), pp. <fPage>-<lPage>. [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#), pp. #7#-#8#
-Website, Name: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^. Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#)
-Website, Organisation: <org> (<writeDate>) ^<title>^. Available from: <url> [Accessed <accessDate>] Citation: ^#0#^. (#1#)
-Law Case: ^<NoP>^ [<writeDate>] <vol> <abbLaw> <page> (<court>) Citation: ^#0#^, #1#
-Report, Name: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^. Report number: <repNum>. <place>: <publisher>. Citation: ^#0#, #1#^. (#2#), pp. <fPage>-<lPage>
-Report, Organisation: <org>. (<writeDate>) ^<title>^. Report number: <repNum>. <place>: <publisher>. Citation: ^#0#^. (#1#), pp. <fPage>-<lPage>
-Report, Name, Online: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^ [online]. Report number: <repNum>. <place>: <publisher>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#), pp. <fPage>-<lPage>
-Report, Organisation, Online: <org>. (<writeDate>) ^<title>^ [online]. Report number: <repNum>. <place>: <publisher>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#^. (#1#), pp. <fPage>-<lPage>
-Video, Name: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. <web> [video]. <posted>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#), <time>
-Video, Organisation:  <org>. (<writeDate>) <title>. ^<web>^ [video]. <posted>. Available from: <url> [Accessed <accessDate>] Citation: ^#0#^. (#1#), <time>
-Student Dissertation/Project/Theses: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^. <level>, <uni> Citation: ^#0#, #1#^. (#2#)
-Student Dissertation/Project/Theses, Online: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^ [online]. <level>, <uni> Available from: <url> [Accessed <accessDate>] Citation: ^#0#, #1#^. (#2#)
+Book: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^. <edition>. <place>: <publisher> Citation: ^#lName#^~lName~. (#writeDate#)
+Book, Online: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^ [online]. <edition>. <place>: <publisher> [Accessed <accessDate>] Citation: ^#lName#^~lName~. (#writeDate#)
+Journal Article: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. ^<journal>^. <vol> (<issue>), pp. <fPage>-<lPage>. Citation: ^#lName#^~lName~. (#writeDate#), pp. #fPage#-#lPage#
+Journal Article, Online: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. ^<journal>^ [online]. <vol> (<issue>), pp. <fPage>-<lPage>. [Accessed <accessDate>] Citation: ^#lName#^~lName~. (#writeDate#), pp. #fPage#-#lPage#
+Website, Name: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^. Available from: <url> [Accessed <accessDate>] Citation: ^#lName#^~lName~. (#writeDate#)
+Website, Organisation: <org> (<writeDate>) ^<title>^. Available from: <url> [Accessed <accessDate>] Citation: ^#org#^. (#writeDate#)
+Law Case: ^<NoP>^ [<writeDate>] <vol> <abbLaw> <page> (<court>) Citation: ^#org#^, (#writeDate#)
+Report, Name: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^. Report number: <repNum>. <place>: <publisher>. Citation: ^#lName#^~lName~. (#writeDate#), pp. <fPage>-<lPage>
+Report, Organisation: <org>. (<writeDate>) ^<title>^. Report number: <repNum>. <place>: <publisher>. Citation: ^#org#^. (#writeDate#), pp. <fPage>-<lPage>
+Report, Name, Online: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^ [online]. Report number: <repNum>. <place>: <publisher>. Available from: <url> [Accessed <accessDate>] Citation: ^#lName#^~lName~. (#writeDate#), pp. <fPage>-<lPage>
+Report, Organisation, Online: <org>. (<writeDate>) ^<title>^ [online]. Report number: <repNum>. <place>: <publisher>. Available from: <url> [Accessed <accessDate>] Citation: ^#org#^. (#writeDate#), pp. <fPage>-<lPage>
+Video, Name: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. <web> [video]. <posted>. Available from: <url> [Accessed <accessDate>] Citation: ^#lName#^~lName~. (#writeDate#), <time>
+Video, Organisation:  <org>. (<writeDate>) <title>. ^<web>^ [video]. <posted>. Available from: <url> [Accessed <accessDate>] Citation: ^#org#^. (#writeDate#), <time>
+Student Dissertation/Project/Theses: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^. <level>, <uni> Citation: ^#lName#^~lName~. (#writeDate#)
+Student Dissertation/Project/Theses, Online: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^ [online]. <level>, <uni> Available from: <url> [Accessed <accessDate>] Citation: ^#lName#^~lName~. (#writeDate#)
 Other: https://www.uwe.ac.uk/study/study-support/study-skills/referencing/uwe-bristol-harvard
