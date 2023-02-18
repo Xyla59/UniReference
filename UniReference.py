@@ -350,6 +350,7 @@ class refBuild:
             if inp == 'n':
                 loop = False
             self.reset()
+        input("Thank you, press ENTER to exit ")
 
 if __name__ == "__main__": #first run code
     ref = refBuild()
