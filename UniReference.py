@@ -22,6 +22,7 @@ class refBuild:
         print("Created by Xyla Oldale")
         print("The centralised referencing system for universities")
         print()
+        print("Enter 'EXIT' to close the program at any time")
         input("Press RETURN to continue ")
 
     def selectStyle(self): #selects uni style
@@ -164,7 +165,7 @@ class refBuild:
             if ind != -1:
                 text = varStr[0:ind]
                 revert = int(varStr[ind+1:len(varStr)])
-                inp = input("Would you like to insert another " + text + " (y/n): ")
+                inp = self.input("Would you like to insert another " + text + " (y/n): ")
                 if inp.lower() == 'y':
                     self.finalise(", ")
                     self.refLoop -= revert
@@ -236,6 +237,12 @@ class refBuild:
             pc.copy(self.citation_)
             print("Copied citation successfully!")
         print()
+
+    def input(self, text):
+        inp = input(text)
+        if inp == "EXIT":
+            self.exit()
+        return inp
         
     def userIn(self, type): #case/switch of user input markers
         ret = ""
@@ -339,6 +346,11 @@ class refBuild:
         self.citation_ = ""
         self.temp = []
         self.refLoop = 0
+
+    def exit(self):
+        print()
+        input("Thank you for using this program, press ENTER to exit ")
+        os._exit(0)
 
     def main(self): #main selections and processing
         loop = True
