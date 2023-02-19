@@ -187,7 +187,7 @@ class refBuild:
             else:
                 self.temp = []
                 count = self.inTypes.count(varStr)
-                if count == 2:
+                if count == 2 or count == 3:
                     ind = self.inTypes.index(varStr)
                     prev = ind
                     for z in range(0, count - 1):
@@ -201,13 +201,15 @@ class refBuild:
                             print(end="")
                     self.change(self.pFType)
                     ind = self.temp.index(", ")
+                    if count == 3:
+                        ind = self.temp.index(", ", ind + 1)
                     self.temp[ind] = self.italics + " and " + self.end
                     for zz in range(0, len(self.temp)):
                         self.finalise(self.temp[zz])
-                elif count > 2:
+                elif count > 3:
                     self.change(self.pFType)
                     self.finalise(self.italics)
-                    self.finalise(" et al")
+                    self.finalise(" et al.")
                     self.finalise(self.end)
                 else:
                     self.change(self.pFType)
@@ -285,7 +287,7 @@ class refBuild:
         elif type == "fPage":
             ret = self.intIn(0,-1,"Enter the first page number: ")
         elif type == "lPage":
-            ret = self.intIn(0,-1,"Enter the first page number: ")
+            ret = self.intIn(0,-1,"Enter the last page number: ")
         elif type == "vol":
             ret = self.intIn(0,-1,"Enter the volume number: ")
         elif type == "edition":
