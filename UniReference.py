@@ -11,8 +11,8 @@ class refBuild:
         self.inTypes = [] #input types
         self.inputs = [] #userins
         self.inputsInt = 0 #no. of ins
-        self.fType = 1
-        self.pFType = 0
+        self.fType = 1 #final output type
+        self.pFType = 0 #prev. final output type
         self.final_ = "" #final reference
         self.citation_ = "" #final citation
         self.temp = [] #temp string array for loops
@@ -23,7 +23,7 @@ class refBuild:
         print("The centralised referencing system for universities")
         print()
         print("Enter 'EXIT' to close the program at any time")
-        input("Press RETURN to continue ")
+        self.input("Press RETURN to continue ")
 
     def selectStyle(self): #selects uni style
         styles = []
@@ -39,7 +39,7 @@ class refBuild:
             num = self.intIn(1, count-1, "Please select the number of the style desired: ")
         stylesF.close()
         choice = styles[num - 1]
-        input("You have selected: %s. Press RETURN to continue " %(choice,))
+        self.input("You have selected: %s. Press RETURN to continue " %(choice,))
         os.system("cls")
         return choice
         
@@ -60,7 +60,7 @@ class refBuild:
             num = self.intIn(1, count-1, "Please select the number of the source desired: ")
         sourcesF.close()
         choice = sources[num - 1]
-        input("You have selected: %s. Press RETURN to continue " %(choice,))
+        self.input("You have selected: %s. Press RETURN to continue " %(choice,))
         os.system("cls")
         return choice
         
@@ -225,13 +225,13 @@ class refBuild:
         print("Reference:" + self.final_) #prints reference
         print(self.citation_) #prints citation
         print()
-        copy = input("Copy reference to clipboard (y/n): ") #copying ref to clipboard (Error with italics)
+        copy = self.input("Copy reference to clipboard (y/n): ") #copying ref to clipboard (Error with italics)
         copy = copy.lower()
         if copy == 'y':
             pc.copy(self.final_)
             print("Copied reference successfully!")
         print()
-        copy = input("Copy citation to clipboard (y/n): ") #copying cite to clipboard (Error with italics)
+        copy = self.input("Copy citation to clipboard (y/n): ") #copying cite to clipboard (Error with italics)
         copy = copy.lower()
         if copy == 'y':
             pc.copy(self.citation_)
@@ -247,50 +247,50 @@ class refBuild:
     def userIn(self, type): #case/switch of user input markers
         ret = ""
         if type == "lName":
-            ret = input("Enter the last name: ")
+            ret = self.input("Enter the last name: ")
             ret = ret.title()
         elif type == "fIn":
-            ret = input("Enter the first initial: ")
+            ret = self.input("Enter the first initial: ")
             ret = ret.title()
         elif type == "NoP":
-            ret = input("Enter the names of the parties (format 'claimant v defendant'): ")
+            ret = self.input("Enter the names of the parties (format 'claimant v defendant'): ")
             ret = ret.title()
         elif type == "abbLaw":
-            ret = input("Enter the abbreviated form of the law report: ")
+            ret = self.input("Enter the abbreviated form of the law report: ")
         elif type == "court":
-            ret = input("Enter the abbreviated form of the court: ")
+            ret = self.input("Enter the abbreviated form of the court: ")
         elif type == "org":
-            ret = input("Enter the organisation name: ")
+            ret = self.input("Enter the organisation name: ")
             ret = ret.title()
         elif type == "accessDate":
-            ret = input("Enter the accessed date (format DD Mon YYYY): ")
+            ret = self.input("Enter the accessed date (format DD Mon YYYY): ")
         elif type == "writeDate":
             ret = self.intIn(1000,-1,"Enter the year the source was created (format YYYY): ")
         elif type == "title":
-            ret = input("Enter the title of the source: ")
+            ret = self.input("Enter the title of the source: ")
         elif type == "place":
-            ret = input("Enter the place of publication: ")
+            ret = self.input("Enter the place of publication: ")
             ret = ret.title()
         elif type == "publish":
-            ret = input("Enter the publisher: ")
+            ret = self.input("Enter the publisher: ")
             ret = ret.title()
         elif type == "url":
-            ret = input("Enter the url of the webpage: ")
+            ret = self.input("Enter the url of the webpage: ")
         elif type == "web":
-            ret = input("Enter the name of the website: ")
+            ret = self.input("Enter the name of the website: ")
             ret = ret.title()
         elif type == "journal":
-            ret = input("Enter the name of the Journal: ")
+            ret = self.input("Enter the name of the Journal: ")
             ret = ret.title()
         elif type == "posted":
-            ret = input("Enter the date the source was posted (format DD Mon): ")
+            ret = self.input("Enter the date the source was posted (format DD Mon): ")
         elif type == "level":
-            ret = input("Enter the level of the work (BSc/MSc/PhD): ")
+            ret = self.input("Enter the level of the work (BSc/MSc/PhD): ")
         elif type == "uni":
-            ret = input("Enter the name of the university: ")
+            ret = self.input("Enter the name of the university: ")
             ret = ret.title()
         elif type == "time":
-            ret = input("Enter the timestamp for the citation (format hh:mm:ss / mm:ss): ")
+            ret = self.input("Enter the timestamp for the citation (format hh:mm:ss / mm:ss): ")
         elif type == "fPage":
             ret = self.intIn(0,-1,"Enter the first page number: ")
         elif type == "lPage":
@@ -304,7 +304,7 @@ class refBuild:
         elif type == "repNum":
             ret = self.intIn(0,-1,"Enter the report number: ")
         else:
-            ret = input("Enter the " + type + ": ")
+            ret = self.input("Enter the " + type + ": ")
         if ret == -1:
             ret = ""
         return ret
@@ -319,7 +319,7 @@ class refBuild:
 
     def intIn(self, minVal, maxVal, text): #allows integer input error handling
         num = -1
-        numstr = input(text)
+        numstr = self.input(text)
         try:
             num = int(numstr)
             if minVal >= -1:
@@ -359,7 +359,7 @@ class refBuild:
             style = self.selectStyle()#selecting uni style
             source = self.selectSource(style) #selecting source type
             self.refBuilder(style, source) #builds reference and citation
-            inp = input("Would you like to build another reference (y/n): ")
+            inp = self.input("Would you like to build another reference (y/n): ")
             inp = inp.lower()
             if inp == 'n':
                 loop = False
