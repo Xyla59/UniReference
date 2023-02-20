@@ -12,7 +12,7 @@ class refBuild:
         self.inputs = [] #userins
         self.inputsInt = 0 #no. of ins
         self.fType = 1 #final output type
-        self.pFType = 0 #prev. final output type
+        self.pFType = -1 #prev. final output type
         self.final_ = "" #final reference
         self.finalNI = "" #final ref no italics markers
         self.citation_ = "" #final citation
@@ -115,7 +115,8 @@ class refBuild:
                     elif char == '#': #sets getting indexed input
                         if inpOn:
                             var = self.inTypes.index(currentDes)
-                            self.finalise(self.inputs[var])
+                            if self.inputs[var] != "None" and self.inputs[var] != "Unknown" and "No " not in self.inputs[var]:
+                                self.finalise(self.inputs[var])
                             currentDes = ""
                             inpOn = False
                         else:
@@ -328,6 +329,9 @@ class refBuild:
     def intIn(self, minVal, maxVal, text): #allows integer input error handling
         num = -1
         numstr = self.input(text)
+        numstr = numstr.title()
+        if self.refLoop != 0 and ("None" in numstr or "No " in numstr or "Unknown" in numstr):
+            return numstr
         try:
             num = int(numstr)
             if minVal >= -1:
@@ -349,7 +353,7 @@ class refBuild:
         self.inputs = []
         self.inputsInt = 0
         self.fType = 1
-        self.pFType = 0
+        self.pFType = -1
         self.final_ = "" 
         self.citation_ = ""
         self.temp = []
