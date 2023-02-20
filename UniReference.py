@@ -14,7 +14,9 @@ class refBuild:
         self.fType = 1 #final output type
         self.pFType = 0 #prev. final output type
         self.final_ = "" #final reference
+        self.finalNI = "" #final ref no italics markers
         self.citation_ = "" #final citation
+        self.citationNI = "" #final cite no italics markers 
         self.temp = [] #temp string array for loops
         self.refLoop = 0
         os.system("cls")
@@ -132,7 +134,6 @@ class refBuild:
                         if currentDes == 'Citation': #switches to citation
                             currentDes += char
                             self.change(2)
-                            self.finalise(currentDes)
                             currentDes = ""   
                         else:
                             currentDes += char
@@ -223,18 +224,18 @@ class refBuild:
     def print(self): #formatted printing
         print()
         print("Reference:" + self.final_) #prints reference
-        print(self.citation_) #prints citation
+        print("Citation:" + self.citation_) #prints citation
         print()
         copy = self.input("Copy reference to clipboard (y/n): ") #copying ref to clipboard (Error with italics)
         copy = copy.lower()
         if copy == 'y':
-            pc.copy(self.final_)
+            pc.copy(self.finalNI)
             print("Copied reference successfully!")
         print()
         copy = self.input("Copy citation to clipboard (y/n): ") #copying cite to clipboard (Error with italics)
         copy = copy.lower()
         if copy == 'y':
-            pc.copy(self.citation_)
+            pc.copy(self.citationNI)
             print("Copied citation successfully!")
         print()
 
@@ -315,8 +316,12 @@ class refBuild:
     def finalise(self, text): #adding to correct variable
         if self.fType == 2:
             self.citation_ += text
+            if text != self.italics and text != self.end:
+                self.citationNI += text
         elif self.fType == 1:
             self.final_ += text
+            if text != self.italics and text != self.end:
+                self.finalNI += text
         elif self.fType == 0:
             self.temp.append(text)
 
