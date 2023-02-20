@@ -3,6 +3,8 @@ Book, Online: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^ [online]. <edit
 Journal Article: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. ^<journal>^. <vol> (<issue>), pp. <fPage>-<lPage>. Citation: (^#lName#^~lName~, #writeDate#, pp. #fPage#-#lPage#)
 Journal Article, Online: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. ^<journal>^ [online]. <vol> (<issue>), pp. <fPage>-<lPage>. [Accessed <accessDate>] Citation: (^#lName#^~lName~, #writeDate#, pp. #fPage#-#lPage#)
 Law Case: ^<NoP>^ [<writeDate>] <vol> <abbLaw> <page> (<court>) Citation: (^#org#^, #writeDate#)
+Newspaper: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. ^<news>^. <posted>, p.<fPage>. Citation: (^#lName#^~lName~, #writeDate#)
+Newspaper, Online: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. ^<news>^ [online]. <posted>, p.<fPage>. Available from: <url> [Accessed <accessDate>] Citation: (^#lName#^~lName~, #writeDate#)
 Report, Name: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^. Report number: <repNum>. <place>: <publisher>. Citation: (^#lName#^~lName~, #writeDate#, pp. #fPage#-#lPage#)
 Report, Organisation: <org>. (<writeDate>) ^<title>^. Report number: <repNum>. <place>: <publisher>. Citation: (^#org#^, #writeDate#, pp. <fPage>-<lPage>)
 Report, Name, Online: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^ [online]. Report number: <repNum>. <place>: <publisher>. Available from: <url> [Accessed <accessDate>] Citation: (^#lName#^~lName~, #writeDate#, pp. <fPage>-<lPage>)

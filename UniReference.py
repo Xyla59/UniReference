@@ -282,6 +282,9 @@ class refBuild:
         elif type == "journal":
             ret = self.input("Enter the name of the Journal: ")
             ret = ret.title()
+        elif type == "news":
+            ret = self.input("Enter the name of the Newspaper: ")
+            ret = ret.title()
         elif type == "posted":
             ret = self.input("Enter the date the source was posted (format DD Mon): ")
         elif type == "level":
