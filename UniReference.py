@@ -31,7 +31,7 @@ class refBuild:
         styles = []
         count = 1
         num = -1
-        stylesF = open("styles.txt", "rt")
+        stylesF = open("files/styles.txt", "rt")
         print("Referencing styles available:")
         for line in stylesF: #lists available uni styles
             styles.append(line)
@@ -49,7 +49,7 @@ class refBuild:
         sources = []
         count = 1
         num = -1
-        file = style + ".txt"
+        file = "files/"+ style + ".txt"
         sourcesF = open(file, "rt")
         print("Referencing sources available:")
         for line in sourcesF: #lists available source types
@@ -67,7 +67,7 @@ class refBuild:
         return choice
         
     def refBuilder(self, style, source): #builds reference and citation
-        file = style + ".txt"
+        file = "files/" + style + ".txt"
         sourcesF = open(file, "rt") #finds ref format
         for line in sourcesF:
             if line.find(source) != -1:
@@ -378,7 +378,7 @@ class refBuild:
             self.reset()
         input("Thank you, press ENTER to exit ")
 
-if __name__ == "__main__": #first run code
-    ref = refBuild()
-    ref.main()
+
+ref = refBuild()
+ref.main()
 
