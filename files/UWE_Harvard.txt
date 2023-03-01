@@ -2,7 +2,7 @@ Book: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^. <edition>. <place>: <p
 Book, Online: <lName>, <fIn>.~author,26~ (<writeDate>) ^<title>^ [online]. <edition>. <place>: <publisher>. [Accessed <accessDate>] Citation: (^#lName#^~lName~, #writeDate#)
 Journal Article: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. ^<journal>^. <vol> (<issue>), pp. <fPage>-<lPage>. Citation: (^#lName#^~lName~, #writeDate#, pp. #fPage#-#lPage#)
 Journal Article, Online: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. ^<journal>^ [online]. <vol> (<issue>), pp. <fPage>-<lPage>. [Accessed <accessDate>]. Citation: (^#lName#^~lName~, #writeDate#, pp. #fPage#-#lPage#)
-Law Case: ^<NoP>^ [<writeDate>] <vol> <abbLaw> <page> (<court>). Citation: (^#org#^, #writeDate#)
+Law Case: ^<NoP>^ [<writeDate>] <vol> <abbLaw> <page> (<court>). Citation: (^#NoP#^, #writeDate#)
 Newspaper: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. ^<news>^. <posted>, p.<fPage>. Citation: (^#lName#^~lName~, #writeDate#)
 Newspaper, Online: <lName>, <fIn>.~author,26~ (<writeDate>) <title>. ^<news>^ [online]. <posted>, p.<fPage>. Available from: <url>. [Accessed <accessDate>] Citation: (^#lName#^~lName~, #writeDate#)
 Parlimentary Act: ^<act>^. ^Chapter <chap>^. (<writeDate>) <place>: <publisher>. Citation: (^#act#^, s. <sec>)
