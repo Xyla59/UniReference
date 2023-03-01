@@ -254,6 +254,9 @@ class refBuild:
         elif type == "fIn":
             ret = self.input("Enter the first initial: ")
             ret = ret.title()
+        elif type == "act":
+            ret = self.input("Enter the name of the Act: ")
+            ret = ret.title()
         elif type == "NoP":
             ret = self.input("Enter the names of the parties (format 'claimant v defendant'): ")
             ret = ret.title()
@@ -308,6 +311,10 @@ class refBuild:
             ret = self.intIn(0,-1,"Enter the issue/part number: ")
         elif type == "repNum":
             ret = self.intIn(0,-1,"Enter the report number: ")
+        elif type == "chap":
+            ret = self.intIn(0,-1,"Enter the chapter number: ")
+        elif type == "sec":
+            ret = self.input("Enter the section number (format: section(subsection)(part)): ")
         else:
             ret = self.input("Enter the " + type + ": ")
         if ret == -1:
