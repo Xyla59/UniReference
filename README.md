@@ -37,4 +37,4 @@ The key characters:
  - "< >" - user input - anything between these characters are classed as a user input, there is a list inside of the python code of common inputs like last name, dates etc. However, using an unknown word is allowed and will print whatever is between the < > to the user for input
  - "^ ^" - italics markers - puts anything between the characters in italics, only appears in the program, copying to clipboard removes these markers
  - "~ ~" - loop markers - tells the program to loop for more inputs. Two types: "name, len" and "name". "name, len" should be used in the reference source, takes multiple inputs by outputting the name to the user to ask if they want to loop and the len tells the program how many characters to jump back (should be 1 character more than required). "name" should be used in citation to loop through already inputted values to add them.
- - "# #"
+ - "# #" - reuses an previously inputted value again, mainly for citations
