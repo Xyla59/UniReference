@@ -197,16 +197,15 @@ class refBuild:
                         try:
                             ind = self.inTypes.index(varStr, prev + 1)
                             self.finalise(", ")
-                            self.finalise(self.italics)
                             self.finalise(self.inputs[ind])
-                            self.finalise(self.end)
+                            prev = ind
                         except:
                             print(end="")
                     self.change(self.pFType)
                     ind = self.temp.index(", ")
                     if count == 3:
                         ind = self.temp.index(", ", ind + 1)
-                    self.temp[ind] = self.italics + " and " + self.end
+                    self.temp[ind] = " and "
                     for zz in range(0, len(self.temp)):
                         self.finalise(self.temp[zz])
                 elif count > 3:
@@ -363,6 +362,8 @@ class refBuild:
         self.pFType = -1
         self.final_ = "" 
         self.citation_ = ""
+        self.finalNI = ""
+        self.citationNI = ""
         self.temp = []
         self.refLoop = 0
 
