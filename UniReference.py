@@ -31,7 +31,7 @@ class refBuild:
         styles = []
         count = 1
         num = -1
-        stylesF = open("files/styles.txt", "rt")
+        stylesF = open("inputFiles/styles.txt", "rt")
         print("Referencing styles available:")
         for line in stylesF: #lists available uni styles
             styles.append(line)
@@ -49,7 +49,7 @@ class refBuild:
         sources = []
         count = 1
         num = -1
-        file = "files/"+ style + ".txt"
+        file = "inputFiles/"+ style + ".txt"
         sourcesF = open(file, "rt")
         print("Referencing sources available:")
         for line in sourcesF: #lists available source types
@@ -67,19 +67,20 @@ class refBuild:
         return choice
         
     def refBuilder(self, style, source): #builds reference and citation
-        file = "files/" + style + ".txt"
+        file = "inputFiles/" + style + ".txt"
         sourcesF = open(file, "rt") #finds ref format
         for line in sourcesF:
             if line.find(source) != -1:
                 ref = line
                 break
         ind = ref.find(':')
-        ref = ref[ind+1:len(ref)]
+        ref = ref[ind+2:len(ref)]
         keyword = False
         italicsOn = False
         loopOn = False
         inpOn = False
         inputsInt = 0
+        val = -1
         self.final_ = ""
         self.citation_ = ""
         currentDes = ""
@@ -98,11 +99,13 @@ class refBuild:
                         keyword = True
                     elif char == '>' and keyword == True: #userin complete, gets input
                         self.inTypes.append(currentDes)
-                        val = str(self.userIn(currentDes))
+                        while val == -1:
+                            val = str(self.userIn(currentDes))
                         self.inputs.append(val)
                         inputsInt += 1
                         self.finalise(val)
                         currentDes = ""
+                        val = -1
                     elif char == '^': #sets italics
                         if italicsOn:
                             self.finalise(self.end)
@@ -218,8 +221,7 @@ class refBuild:
             loopOn = False
         else:
             self.finalise(varStr)
-            loopOn = True
-            
+            loopOn = True         
 
     def print(self): #formatted printing
         print()
@@ -237,6 +239,8 @@ class refBuild:
         if copy == 'y':
             pc.copy(self.citationNI)
             print("Copied citation successfully!")
+        print()
+        self.save()
         print()
 
     def input(self, text):
@@ -354,6 +358,73 @@ class refBuild:
             num = -1
         return num
     
+    def save(self):
+        loop = True
+        fileName = ""
+        inp = self.input("Would you like to save this reference to a file (y/n): ")
+        print()
+        if inp.lower() == 'y':
+            while loop:
+                new = self.input("Would you like to save to a new file (n) or an existing file (e): ")
+                print()
+                if new.lower() == 'n':
+                    loop = False
+                    try:
+                        fileName = self.input("Enter the file name: ")
+                        fileName += ".txt"
+                        os.chdir(os.getcwd() + "\\outputFiles")
+                        nFile = open(fileName, "w")
+                        nFile.write("References:\n")
+                        nFile.write(self.finalNI + "\n")
+                        nFile.close()
+                        os.chdir("\\..")
+                        print("File created and written to successfully!")
+                    except Exception as e:
+                        print("ERROR: Unexpected error creating file")
+                        print(e)
+                elif new.lower() == 'e':
+                    loop = False
+                    entries = []
+                    nEntries = []
+                    nEntries[0] = "References:\n"
+                    count = 0
+                    try:
+                        fileName = self.input("Enter the file name: ")
+                        fileName += ".txt"
+                        os.chdir(os.getcwd() + "\\outputFiles")
+                        eFile = open(fileName, "r")
+                        for line in eFile:
+                            entries.append(line)
+                            count += 1
+                            j = 0
+                        for i in range(1, count+1):
+                            if int(entries[i][j]) > int(self.final_[j]):
+                                i -= 1
+                                nEntries[i] = self.finalNI + "\n"
+                                i += 1
+                                nEntries[i] = entries[i-1]
+                                for k in range(i, count+1):
+                                    nEntries[k+1] = entries[k]
+                            elif int(entries[i][j]) == int(self.final_[j]):
+                                j += 1
+                                i -= 1
+                            else:
+                                nEntries[i] = entries[i]
+                                j = 0
+                        eFile.close()
+                        eFile = open(fileName, "w")
+                        for item in entries:
+                            eFile.write(entries[item])
+                        eFile.close()
+                        os.chdir("\\..")
+                        print("File written to successfully!")
+                    except Exception as e:
+                        print("ERROR: Unexpected error accessing file")
+                        print(e)
+                else:
+                    print("ERROR: Invalid input, try again")
+
+    
     def reset(self):
         self.inTypes = []
         self.inputs = []
@@ -386,7 +457,5 @@ class refBuild:
             self.reset()
         input("Thank you, press ENTER to exit ")
 
-
 ref = refBuild()
 ref.main()
-
