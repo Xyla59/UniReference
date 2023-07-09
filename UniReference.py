@@ -386,7 +386,7 @@ class refBuild:
                     loop = False
                     entries = []
                     count = 0
-                    overwrite = False
+                    overwrite = True
                     try:
                         fileName = self.input("Enter the file name: ")
                         fileName += ".txt"
@@ -417,7 +417,6 @@ class refBuild:
                                 overwrite = False
                             else:
                                 nEntries[i] = entries[i]
-                                overwrite = True
                                 j = 0
                             i += 1
                         eFile.close()
