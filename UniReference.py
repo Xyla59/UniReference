@@ -377,7 +377,7 @@ class refBuild:
                         nFile.write("References:\n")
                         nFile.write(self.finalNI + "\n")
                         nFile.close()
-                        os.chdir("\\..")
+                        os.chdir("..")
                         print("File created and written to successfully!")
                     except Exception as e:
                         print("ERROR: Unexpected error creating file")
@@ -385,9 +385,8 @@ class refBuild:
                 elif new.lower() == 'e':
                     loop = False
                     entries = []
-                    nEntries = []
-                    nEntries[0] = "References:\n"
                     count = 0
+                    overwrite = False
                     try:
                         fileName = self.input("Enter the file name: ")
                         fileName += ".txt"
@@ -396,31 +395,52 @@ class refBuild:
                         for line in eFile:
                             entries.append(line)
                             count += 1
-                            j = 0
-                        for i in range(1, count+1):
-                            if int(entries[i][j]) > int(self.final_[j]):
-                                i -= 1
+                        j = 0
+                        nEntries = []
+                        for x in range(0, count+1):
+                            nEntries.append(" ")
+                        nEntries[0] = "References:\n"
+                        i = 1
+                        while i <= count:
+                            if ord(entries[i][j]) > ord(self.final_[j]):
+                                if overwrite:
+                                    i -= 1
                                 nEntries[i] = self.finalNI + "\n"
                                 i += 1
                                 nEntries[i] = entries[i-1]
-                                for k in range(i, count+1):
+                                for k in range(i, count):
                                     nEntries[k+1] = entries[k]
-                            elif int(entries[i][j]) == int(self.final_[j]):
+                                break
+                            elif ord(entries[i][j]) == ord(self.final_[j]):
                                 j += 1
                                 i -= 1
+                                overwrite = False
                             else:
                                 nEntries[i] = entries[i]
+                                overwrite = True
                                 j = 0
+                            i += 1
                         eFile.close()
                         eFile = open(fileName, "w")
-                        for item in entries:
-                            eFile.write(entries[item])
+                        for item in nEntries:
+                            eFile.write(item)
                         eFile.close()
-                        os.chdir("\\..")
+                        os.chdir("..")
+                        print()
+                        print("File written to successfully!")
+                    except IndexError:
+                        nEntries[count] = self.finalNI + "\n"
+                        eFile.close()
+                        eFile = open(fileName, "w")
+                        for item in nEntries:
+                            eFile.write(item)
+                        eFile.close()
+                        os.chdir("..")
+                        print()
                         print("File written to successfully!")
                     except Exception as e:
                         print("ERROR: Unexpected error accessing file")
-                        print(e)
+                        print("Error Message: " + str(e))
                 else:
                     print("ERROR: Invalid input, try again")
 
