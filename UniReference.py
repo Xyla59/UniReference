@@ -19,12 +19,10 @@ class refBuild:
         self.citationNI = "" #final cite no italics markers 
         self.temp = [] #temp string array for loops
         self.refLoop = 0
-        os.system("cls")
-        print("Welcome to UniReference")#intro
-        print("Created by Xyla Oldale")
-        print("The centralised referencing system for universities")
-        print()
-        print("Enter 'EXIT' to close the program at any time")
+        self.clrScr()
+        print("Welcome to UniReference!")#intro
+        print("Created by Xyla Oldale.")
+        print("The centralised referencing system for universities.")
         self.input("Press RETURN to continue ")
 
     def selectStyle(self): #selects uni style
@@ -42,7 +40,7 @@ class refBuild:
         stylesF.close()
         choice = styles[num - 1]
         self.input("You have selected: %s. Press RETURN to continue " %(choice,))
-        os.system("cls")
+        self.clrScr()
         return choice
         
     def selectSource(self, style): #selects source type
@@ -63,8 +61,13 @@ class refBuild:
         sourcesF.close()
         choice = sources[num - 1]
         self.input("You have selected: %s. Press RETURN to continue " %(choice,))
-        os.system("cls")
+        self.clrScr()
         return choice
+
+    def clrScr(self):
+        os.system("cls")
+        print("Enter 'EXIT' to close the program at any time.")
+        print()
         
     def refBuilder(self, style, source): #builds reference and citation
         file = "inputFiles/" + style + ".txt"
@@ -80,7 +83,7 @@ class refBuild:
         loopOn = False
         inpOn = False
         inputsInt = 0
-        val = -1
+        val = ""
         self.final_ = ""
         self.citation_ = ""
         currentDes = ""
@@ -99,13 +102,13 @@ class refBuild:
                         keyword = True
                     elif char == '>' and keyword == True: #userin complete, gets input
                         self.inTypes.append(currentDes)
-                        while val == -1:
+                        while val == "":
                             val = str(self.userIn(currentDes))
                         self.inputs.append(val)
                         inputsInt += 1
                         self.finalise(val)
                         currentDes = ""
-                        val = -1
+                        val = ""
                     elif char == '^': #sets italics
                         if italicsOn:
                             self.finalise(self.end)
@@ -224,7 +227,7 @@ class refBuild:
             loopOn = True         
 
     def print(self): #formatted printing
-        print()
+        self.clrScr()
         print("Reference:" + self.final_) #prints reference
         print("Citation:" + self.citation_) #prints citation
         print()
@@ -241,7 +244,6 @@ class refBuild:
             print("Copied citation successfully!")
         print()
         self.save()
-        print()
 
     def input(self, text):
         inp = input(text)
@@ -472,7 +474,7 @@ class refBuild:
     def main(self): #main selections and processing
         loop = True
         while loop == True: #looping until no more refs wanted
-            os.system("cls")
+            self.clrScr()
             style = self.selectStyle()#selecting uni style
             source = self.selectSource(style) #selecting source type
             self.refBuilder(style, source) #builds reference and citation
