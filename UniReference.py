@@ -370,14 +370,16 @@ class refBuild:
                 if new.lower() == 'n':
                     loop = False
                     try:
-                        fileName = self.input("Enter the file name: ")
-                        fileName += ".txt"
                         os.chdir(os.getcwd() + "\\outputFiles")
+                        fileName = self.input("Enter the file name: ")
+                        if fileName[-4] != ".":
+                            fileName += ".txt"
                         nFile = open(fileName, "w")
                         nFile.write("References:\n")
                         nFile.write(self.finalNI + "\n")
                         nFile.close()
                         os.chdir("..")
+                        print()
                         print("File created and written to successfully!")
                     except Exception as e:
                         print("ERROR: Unexpected error creating file")
@@ -388,9 +390,14 @@ class refBuild:
                     count = 0
                     overwrite = True
                     try:
-                        fileName = self.input("Enter the file name: ")
-                        fileName += ".txt"
                         os.chdir(os.getcwd() + "\\outputFiles")
+                        print("Files available:")
+                        print()
+                        os.system("Dir /B")
+                        print()
+                        fileName = self.input("Enter the file name: ")
+                        if fileName[-4] != ".":
+                            fileName += ".txt"
                         eFile = open(fileName, "r")
                         for line in eFile:
                             entries.append(line)
