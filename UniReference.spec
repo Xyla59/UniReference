@@ -8,7 +8,7 @@ a = Analysis(
     ['C:/Users/xande/OneDrive/Documents/UniReference/UniReference.py'],
     pathex=[],
     binaries=[],
-    datas=[('C:/Users/xande/OneDrive/Documents/UniReference/files', 'files/')],
+    datas=[('C:/Users/xande/OneDrive/Documents/UniReference/inputFiles', 'inputFiles/'), ('C:/Users/xande/OneDrive/Documents/UniReference/outputFiles', 'outputFiles/')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
