@@ -64,7 +64,7 @@ class refBuild:
         self.clrScr()
         return choice
 
-    def clrScr(self):
+    def clrScr(self): #clears screen and adds exit message to top 
         os.system("cls")
         print("Enter 'EXIT' to close the program at any time.")
         print()
@@ -154,16 +154,13 @@ class refBuild:
                     currentDes += char
                 self.refLoop += 1
             self.print() #formatted printed
-            #debug purposes
-            #for i in range(len(inputs)):
-            #    print(inputs[i])
 
-    def change(self, fType):
+    def change(self, fType): #changes finalisation type and records previous 
         if self.fType != fType:
             self.pFType = self.fType
             self.fType = fType
 
-    def loop(self, loopOn, varStr):
+    def loop(self, loopOn, varStr): #loops for more inputs, for more authors etc
         if loopOn:
             self.change(0)
             try:
@@ -245,13 +242,14 @@ class refBuild:
         print()
         self.save()
 
-    def input(self, text):
+    def input(self, text): #input validation
         inp = input(text)
         if inp == "EXIT":
             self.exit()
-        elif "*" in inp or "@" in inp or "#" in inp or "/" in inp or "%" in inp or "$" in inp:
+        #checks for illegal characters, chr(92) is "\"
+        elif "*" in inp or "@" in inp or "#" in inp or "/" in inp or "%" in inp or "$" in inp or "£" in inp or "<" in inp or ">" in inp or '\\' in inp or "|" in inp or chr(92) in inp or "{" in inp or "}" in inp:
             inp = -1
-            print("Error: Input must not contain illegal characters (*, @, #, /, %, $)")
+            print("Error: Input must not contain illegal characters (*, @, #, /, %, $, £, <, >, \, |, {, })")
         return inp
         
     def userIn(self, type): #case/switch of user input markers
@@ -364,7 +362,7 @@ class refBuild:
                 num = -1
         return num
     
-    def save(self):
+    def save(self): #saving to file
         loop = True
         fileName = ""
         inp = self.input("Would you like to save this reference to a file (y/n): ")
@@ -373,7 +371,7 @@ class refBuild:
             while loop:
                 new = self.input("Would you like to save to a new file (n) or an existing file (e): ")
                 print()
-                if new.lower() == 'n':
+                if new.lower() == 'n': #new file
                     loop = False
                     try:
                         os.chdir(os.getcwd() + "\\outputFiles")
@@ -390,21 +388,21 @@ class refBuild:
                     except Exception as e:
                         print("ERROR: Unexpected error creating file")
                         print(e)
-                elif new.lower() == 'e':
+                elif new.lower() == 'e': #existing file
                     loop = False
                     entries = []
                     count = 0
                     overwrite = True
                     try:
-                        os.chdir(os.getcwd() + "\\outputFiles")
+                        os.chdir(os.getcwd() + "\\outputFiles") #changes directory to output files
                         print("Files available:")
                         print()
-                        os.system("Dir /B")
+                        os.system("Dir /B") #prints files available
                         print()
                         fileName = self.input("Enter the file name: ")
                         if fileName[-4] != ".":
                             fileName += ".txt"
-                        eFile = open(fileName, "r")
+                        eFile = open(fileName, "r") #reads file for sorting
                         for line in eFile:
                             entries.append(line)
                             count += 1
@@ -414,7 +412,7 @@ class refBuild:
                             nEntries.append(" ")
                         nEntries[0] = "References:\n"
                         i = 1
-                        while i <= count:
+                        while i <= count: #sorts into alphabetical then saves to file
                             if ord(entries[i][j]) > ord(self.final_[j]):
                                 if overwrite:
                                     i -= 1
@@ -437,10 +435,10 @@ class refBuild:
                         for item in nEntries:
                             eFile.write(item)
                         eFile.close()
-                        os.chdir("..")
+                        os.chdir("..") #backs out of outputFiles directory
                         print()
                         print("File written to successfully!")
-                    except IndexError:
+                    except IndexError: #If reaches end, adds new reference to end
                         nEntries[count] = self.finalNI + "\n"
                         eFile.close()
                         eFile = open(fileName, "w")
@@ -457,7 +455,7 @@ class refBuild:
                     print("ERROR: Invalid input, try again")
 
     
-    def reset(self):
+    def reset(self): #resets variables for new reference
         self.inTypes = []
         self.inputs = []
         self.inputsInt = 0
@@ -470,7 +468,7 @@ class refBuild:
         self.temp = []
         self.refLoop = 0
 
-    def exit(self):
+    def exit(self): #exits program
         print()
         input("Thank you for using this program, press ENTER to exit ")
         os._exit(0)
@@ -489,5 +487,5 @@ class refBuild:
             self.reset()
         input("Thank you, press ENTER to exit ")
 
-ref = refBuild()
-ref.main()
+ref = refBuild() #initialises builder
+ref.main() #runs builder

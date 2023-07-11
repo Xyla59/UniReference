@@ -46,9 +46,9 @@
   ('base_library.zip',
    'C:\\Users\\xande\\OneDrive\\Documents\\UniReference\\build\\UniReference\\base_library.zip',
    'DATA'),
-  ('inputFiles\\styles.txt',
-   'C:\\Users\\xande\\OneDrive\\Documents\\UniReference\\inputFiles\\styles.txt',
-   'DATA'),
   ('inputFiles\\UWE_Harvard.txt',
    'C:\\Users\\xande\\OneDrive\\Documents\\UniReference\\inputFiles\\UWE_Harvard.txt',
+   'DATA'),
+  ('inputFiles\\styles.txt',
+   'C:\\Users\\xande\\OneDrive\\Documents\\UniReference\\inputFiles\\styles.txt',
    'DATA')],)
