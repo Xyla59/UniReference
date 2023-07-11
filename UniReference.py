@@ -231,13 +231,13 @@ class refBuild:
         print("Reference:" + self.final_) #prints reference
         print("Citation:" + self.citation_) #prints citation
         print()
-        copy = self.input("Copy reference to clipboard (y/n): ") #copying ref to clipboard (Error with italics)
+        copy = self.input("Copy reference to clipboard (y/n): ") #copying ref to clipboard, doesn't copy italics
         copy = copy.lower()
         if copy == 'y':
             pc.copy(self.finalNI)
             print("Copied reference successfully!")
         print()
-        copy = self.input("Copy citation to clipboard (y/n): ") #copying cite to clipboard (Error with italics)
+        copy = self.input("Copy citation to clipboard (y/n): ") #copying cite to clipboard, doesn't copy italics
         copy = copy.lower()
         if copy == 'y':
             pc.copy(self.citationNI)
@@ -249,6 +249,9 @@ class refBuild:
         inp = input(text)
         if inp == "EXIT":
             self.exit()
+        elif "*" in inp or "@" in inp or "#" in inp or "/" in inp or "%" in inp or "$" in inp:
+            inp = -1
+            print("Error: Input must not contain illegal characters (*, @, #, /, %, $)")
         return inp
         
     def userIn(self, type): #case/switch of user input markers
@@ -341,23 +344,24 @@ class refBuild:
     def intIn(self, minVal, maxVal, text): #allows integer input error handling
         num = -1
         numstr = self.input(text)
-        numstr = numstr.title()
-        if self.refLoop != 0 and ("None" in numstr or "No " in numstr or "Unknown" in numstr):
-            return numstr
-        try:
-            num = int(numstr)
-            if minVal >= -1:
-                if num < minVal: #lower integer error handling
-                    print("ERROR: Please enter a number greater than", minVal)
-                    num = -1
-            if maxVal > -1:
-                if num > maxVal: #higher integer error handling
-                    print("ERROR: Please enter a number less than", maxVal)
-                    num = -1
-        except: #other type error handling
-            if (numstr != ""):
-                print("ERROR: Please enter a whole number")
-            num = -1
+        if numstr != -1:
+            numstr = numstr.title()
+            if self.refLoop != 0 and ("None" in numstr or "No " in numstr or "Unknown" in numstr):
+                return numstr
+            try:
+                num = int(numstr)
+                if minVal >= -1:
+                    if num < minVal: #lower integer error handling
+                        print("ERROR: Please enter a number greater than", minVal)
+                        num = -1
+                if maxVal > -1:
+                    if num > maxVal: #higher integer error handling
+                        print("ERROR: Please enter a number less than", maxVal)
+                        num = -1
+            except: #other type error handling
+                if (numstr != ""):
+                    print("ERROR: Please enter a whole number")
+                num = -1
         return num
     
     def save(self):
