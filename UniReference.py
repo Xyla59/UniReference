@@ -193,7 +193,7 @@ class refBuild:
             else:
                 self.temp = []
                 count = self.inTypes.count(varStr)
-                if count == 2 or count == 3:
+                if count == 2 or count == 3: #requires "and" word to be included in citation
                     ind = self.inTypes.index(varStr)
                     prev = ind
                     for z in range(0, count - 1):
@@ -211,7 +211,7 @@ class refBuild:
                     self.temp[ind] = " and "
                     for zz in range(0, len(self.temp)):
                         self.finalise(self.temp[zz])
-                elif count > 3:
+                elif count > 3: #requires "et al." in citation
                     self.change(self.pFType)
                     self.finalise(self.italics)
                     self.finalise(" et al.")
@@ -228,13 +228,14 @@ class refBuild:
         print("Reference:" + self.final_) #prints reference
         print("Citation:" + self.citation_) #prints citation
         print()
-        copy = self.input("Copy reference to clipboard (y/n): ") #copying ref to clipboard, doesn't copy italics
+        print("NOTE: Copying and saving removes italics from reference and citation, replaced with '*' either side of the italicised word")
+        copy = self.input("Copy reference to clipboard (y/n): ") #copying ref to clipboard, doesn't copy italic markers, replaced with *
         copy = copy.lower()
         if copy == 'y':
             pc.copy(self.finalNI)
             print("Copied reference successfully!")
         print()
-        copy = self.input("Copy citation to clipboard (y/n): ") #copying cite to clipboard, doesn't copy italics
+        copy = self.input("Copy citation to clipboard (y/n): ") #copying cite to clipboard, doesn't copy italic markers, replaced with *
         copy = copy.lower()
         if copy == 'y':
             pc.copy(self.citationNI)
@@ -330,11 +331,15 @@ class refBuild:
     def finalise(self, text): #adding to correct variable
         if self.fType == 2:
             self.citation_ += text
-            if text != self.italics and text != self.end:
+            if text == self.italics or text == self.end:
+                self.citationNI += "*"
+            else:
                 self.citationNI += text
         elif self.fType == 1:
             self.final_ += text
-            if text != self.italics and text != self.end:
+            if text == self.italics or text == self.end:
+                self.finalNI += "*"
+            else:
                 self.finalNI += text
         elif self.fType == 0:
             self.temp.append(text)
